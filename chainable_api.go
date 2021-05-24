@@ -151,6 +151,15 @@ func (db *DB) Where(query interface{}, args ...interface{}) (tx *DB) {
 	return
 }
 
+// PreWhere add conditions
+func (db *DB) PreWhere(query interface{}, args ...interface{}) (tx *DB) {
+	tx = db.getInstance()
+	if conds := tx.Statement.BuildCondition(query, args...); len(conds) > 0 {
+		tx.Statement.AddClause(clause.PreWhere{Exprs: conds})
+	}
+	return
+}
+
 // Not add NOT conditions
 func (db *DB) Not(query interface{}, args ...interface{}) (tx *DB) {
 	tx = db.getInstance()
