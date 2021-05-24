@@ -7,11 +7,12 @@ import (
 // Where where clause
 type Where struct {
 	Exprs []Expression
+	name string
 }
 
 // Name where clause name
 func (where Where) Name() string {
-	return "WHERE"
+	return "PREWHERE"
 }
 
 // Build build where clause
